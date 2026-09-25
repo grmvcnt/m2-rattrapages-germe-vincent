@@ -1,3 +1,8 @@
+locals {
+  github_owner = split("/", var.github_repository)[0]
+  github_repo  = split("/", var.github_repository)[1]
+}
+
 data "aws_iam_policy_document" "ecs_tasks_assume" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -79,9 +84,13 @@ data "aws_iam_policy_document" "github_assume" {
     }
 
     condition {
-      test     = "StringEquals"
+      test     = "StringLike"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.github_repository}:ref:refs/heads/${var.github_branch}"]
+
+      values = [
+        "repo:${var.github_repository}:ref:refs/heads/${var.github_branch}",
+        "repo:${local.github_owner}@*/${local.github_repo}@*:ref:refs/heads/${var.github_branch}",
+      ]
     }
   }
 }

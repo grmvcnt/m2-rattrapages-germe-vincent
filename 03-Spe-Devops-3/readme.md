@@ -118,7 +118,7 @@ Enfin, le state Terraform local n'est ni chiffré, ni sauvegardé, ni verrouill�
 
 ## Vidéo
 
-Lien YouTube (non répertorié) :
+Lien YouTube (non répertorié) : https://youtu.be/UlUgALZGB4A
 
 ## Recherches web
 

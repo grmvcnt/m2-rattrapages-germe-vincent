@@ -1,0 +1,59 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram name="Architecture AWS" id="architecture-aws">
+    <mxGraphModel dx="900" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="560" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vpc" value="VPC - deux sous-reseaux publics" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;fillColor=none;strokeColor=#8C4FFF;fontColor=#8C4FFF;verticalAlign=top;align=left;spacingLeft=10;spacingTop=6" vertex="1" parent="1">
+          <mxGeometry x="260" y="190" width="460" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="gha" value="GitHub Actions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFEFEF;strokeColor=#24292E" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ecr" value="Amazon ECR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="Utilisateur" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666" vertex="1" parent="1">
+          <mxGeometry x="50" y="240" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="alb" value="Application&#10;Load Balancer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366" vertex="1" parent="1">
+          <mxGeometry x="290" y="240" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="task" value="ECS Fargate&#10;conteneur port 3000" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF" vertex="1" parent="1">
+          <mxGeometry x="520" y="240" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cw" value="CloudWatch&#10;logs et alarmes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450" vertex="1" parent="1">
+          <mxGeometry x="520" y="430" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="build et push de l'image" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=11" edge="1" parent="1" source="gha" target="ecr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="image" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=11" edge="1" parent="1" source="ecr" target="task">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="605" y="70" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="mise a jour du service" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;fontSize=11" edge="1" parent="1" source="gha" target="task">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="125" y="150" />
+              <mxPoint x="760" y="150" />
+              <mxPoint x="760" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="HTTP 80" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=11" edge="1" parent="1" source="user" target="alb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="HTTP 3000" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=11" edge="1" parent="1" source="alb" target="task">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="logs" style="edgeStyle=orthogonalEdgeStyle;html=1;fontSize=11" edge="1" parent="1" source="task" target="cw">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
